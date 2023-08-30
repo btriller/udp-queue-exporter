@@ -1,0 +1,16 @@
+[Unit]
+Description=Prometheus UDP queue exporter
+ConditionFileIsExecutable=/usr/local/bin/udp-queue-exporter.py
+After=network.target
+After=syslog.target
+
+[Service]
+StartLimitInterval=5
+StartLimitBurst=10
+ExecStart=/usr/local/bin/udp-queue-exporter.py
+Restart=always
+RestartSec=120
+DynamicUser=yes
+
+[Install]
+WantedBy=multi-user.target
